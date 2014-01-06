@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title> DP Number Picker jQuery Plugin Example</title>
+	<link rel="stylesheet" href="src/jquery.dpNumberPicker.holoDark.css" />
+	<style>
+		body {
+			background-color: #000000;
+		}
+	</style>
+	<script src="jquery-2.0.3.min.js"></script>
+	<script src="src/jQuery.dpNumberPicker.js"></script>
+	<script>
+		$(document).ready(function(){
+		
+			$("#myPicker").dpNumberPicker({
+				formatter: function(val){
+					return "$ "+val;
+				},
+				value: 5,
+				format: "#.##",
+				min: 2,
+				max: 7
+			});
+		
+		});
+	</script>	
+</head>
+<body>
+	<div id="myPicker"></div>
+</body>
+</html>
