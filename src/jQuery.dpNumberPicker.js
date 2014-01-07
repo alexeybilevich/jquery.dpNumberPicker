@@ -1,7 +1,7 @@
-/* 
-	DP Number Picker jQuery Plugin
-	Created by Dustin Poissant on 1/4/14
-	Licence MIT
+/*
+	DP Number Picker jQuery Plugin, Version 1.0
+	Copyright (C) Dustin Poissant 2014
+	See Lincese.rtf (distributed with this document) for more information reguarding usage.
 */
 ;(function($){
 	$.fn.dpNumberPicker = function(){
