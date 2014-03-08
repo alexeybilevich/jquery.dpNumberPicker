@@ -24,9 +24,9 @@
         "dpUI",
         "dpNumberPicker"
     ],
-    "homepage": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/",
-    "docs": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/",
-    "demo": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/examples/",
+    "homepage": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/index.html",
+    "docs": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/index.html",
+    "demo": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/examples/index.html",
     "downlaod": "https://github.com/dustinpoissant/jquery.dpNumberPicker/archive/master.zip",
     "bugs": "https://github.com/dustinpoissant/jquery.dpNumberPicker/issues",
     "maintainers": [

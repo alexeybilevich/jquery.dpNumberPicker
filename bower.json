@@ -2,7 +2,7 @@
   "name": "dpNumberPicker",
   "description": "A jQuery plugin that easily allows the user to select or enter a number.",
   "version": "1.0.1",
-  "homepage": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/",
+  "homepage": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/index.html",
   "author": {
     "name": "Dustin Poissant",
     "url": "https://github.com/dustinpoissant"
