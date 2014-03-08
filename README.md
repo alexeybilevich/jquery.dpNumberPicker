@@ -1,8 +1,10 @@
-jquery.dpToast
+jquery.dpNumberPicker
 ==============
 
-A jQuery Plugin that simulates an Android Toast (Jellybean)
+A jQuery Plugin which creates a widget that allows users to select a easily select a number. Number can have a minimum or maximum buttons. "+" and "-" buttons are used as controls along with keyboard input. Various Callback methods are available. And the number can be formatter using a formatter method or a format string (or both together).
 
-Created by Dustin Poissant on 1/3/2014
+DP Number Picker jQuery Plugin, Version 1.0.1
+Copyright (C) Dustin Poissant 2014
+License CC BY-NC-SA 3.0 US
+http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 
-MIT License

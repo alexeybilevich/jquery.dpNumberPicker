@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+	DP Number Picker jQuery Plugin, Version 1.0.1
+	Copyright (C) Dustin Poissant 2014
+	License CC BY-NC-SA 3.0 US
+	http://creativecommons.org/licenses/by-nc-sa/3.0/us/
+-->
+<html>
+<head>
+	<title>DP Number Picker v1.0.1</title>
+	<!-- Scripts -->
+	<!--[if lt IE 9]>  
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js">		</script> 
+    <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+	<![endif]-->  
+	<!--[if (gte IE 9) | (!IE)]><!-->  
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>  
+	<!--<![endif]-->
+	<link rel="stylesheet" href="../src/minified/dpNumberPicker-holoLight-1.0.1-min.css" />
+	<script src="../src/minified/dpNumberPicker-1.0.1-min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#np").dpNumberPicker({
+				min: -5,
+				max: 5,
+				beforeIncrease: function(){log("Before Increase: "+this.options.value);},
+				afterIncrease: function(){log("After Increase: "+this.options.value);},
+				beforeDecrease: function(){log("Before Decrease: "+this.options.value);},
+				afterDecrease: function(){log("After Decrease: "+this.options.value);},
+				beforeChange: function(){log("Before Change: "+this.options.value);},
+				afterChange: function(){log("After Change: "+this.options.value);},
+				onMin: function(){log("On Min: "+this.options.value);},
+				onMax: function(){log("On Max: "+this.options.value);},
+			});
+		});
+		var count = 0;
+		function log(message){
+			var l = $("#log");
+			count++;
+			l.html( count+": "+message+"<br>"+l.html());
+		}
+	</script>
+	<style>
+		#log {
+			border: 1px solid black;
+			height: 100px;
+			overflow-y: scroll;
+			padding: 8px;
+		}
+	</style>
+</head>
+<body>
+	<div id="np"></div>
+	<br><br>
+	<div id="log"></div>
+</body>
+</html>

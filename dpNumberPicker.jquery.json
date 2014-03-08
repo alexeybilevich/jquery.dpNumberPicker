@@ -1,0 +1,39 @@
+{
+    "name": "dpNumberPicker",
+    "version": "1.0.1",
+    "title": "DP Number Picker",
+    "author": {
+        "name": "Dustin Poissant",
+        "url": "https://github.com/dustinpoissant"
+    },
+    "licenses": [
+        {
+            "type": "CC BY-NC-SA 3.0 US",
+            "url": "https://github.com/dustinpoissant/jquery.dpNumberPicker/blob/master/LICENSE.md"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">=2.1"
+    },
+    "description": "A jQuery plugin that easily allows the user to select or enter a number.",
+    "keywords": [
+        "number",
+        "picker",
+        "Interface",
+        "UI",
+        "dpUI",
+        "dpNumberPicker"
+    ],
+    "homepage": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/",
+    "docs": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/",
+    "demo": "https://rawgithub.com/dustinpoissant/jquery.dpNumberPicker/master/examples/",
+    "downlaod": "https://github.com/dustinpoissant/jquery.dpNumberPicker/archive/master.zip",
+    "bugs": "https://github.com/dustinpoissant/jquery.dpNumberPicker/issues",
+    "maintainers": [
+        {
+            "name": "Dustin Poissant",
+            "email": "dustinpoissant@gmail.com",
+            "url": "https://github.com/dustinpoissant"
+        }
+    ]
+}

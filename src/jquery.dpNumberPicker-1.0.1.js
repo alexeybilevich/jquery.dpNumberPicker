@@ -1,7 +1,8 @@
 /*
-	DP Number Picker jQuery Plugin, Version 1.0
+	DP Number Picker jQuery Plugin, Version 1.0.1
 	Copyright (C) Dustin Poissant 2014
-	See Lincese.rtf (distributed with this document) for more information reguarding usage.
+	License CC BY-NC-SA 3.0 US
+	http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 */
 ;(function($){
 	$.fn.dpNumberPicker = function(){
@@ -31,6 +32,7 @@
 			if(arg == "increase" || arg == "add" || arg == "addition" || arg == "incrament") this.each(function(){this.increase();});
 			if(arg == "decrease" || arg == "sub" || arg == "subtract" || arg == "decrament") this.each(function(){this.decrease();});
 			if(args.length > 1 && (arg=="change" || arg == "setvalue" || arg == "value" || arg == "set") ) this.each(function(){this.setValue(args[1]);});
+			if(args.length > 1 && (arg=="update" || arg =="refresh") ) this.each(function(){this.update();});
 			return this;
 		} else if (arguments.length > 0 && typeof(arguments[0]) == "object"){
 			this.each(function(){this.options = $.extend(defaultOptions, args[0]);});
@@ -40,8 +42,8 @@
 			var np = $(this);
 			var s = "<div class='dp-numberPicker-sub'>"+element.options.subText+"</div><input type='text' class='dp-numberPicker-input'"
 			if(!element.options.editable) s+= " disabled";
-			if(element.options.format) s += " value='"+element.options.formatter( formatter(element.options.value, element.options.format))+"' ";
-			else s += " value='"+element.options.formatter(element.options.value)+"' ";
+			if(element.options.format) s += " value='"+element.options.formatter.call(element, formatter(element.options.value, element.options.format))+"' ";
+			else s += " value='"+element.options.formatter.call(element, element.options.value)+"' ";
 			s += "' /><div class='dp-numberPicker-add'>"+element.options.addText+"</div>";
 			np.addClass("dp-numberPicker").html(s);
 			
@@ -49,21 +51,21 @@
 				np.children().removeClass("disabled");
 				var changed = false;
 				var newValue = element.options.value+element.options.step;
-				if( element.options.max && element.options.max < newValue) newValue = element.options.max;
+				if( element.options.max!==false && element.options.max < newValue) newValue = element.options.max;
 				if (newValue != element.options.value){
-					element.options.beforeChange();
-					element.options.beforeIncrease();
+					element.options.beforeChange.call(element);
+					element.options.beforeIncrease.call(element);
 					changed = true;
 				}
-				if( element.options.max && element.options.max == newValue){
+				if( element.options.max!==false && element.options.max == newValue){
 					np.children(".dp-numberPicker-add").addClass("disabled");
-					element.options.onMax();
+					element.options.onMax.call(element);
 				}
 				element.options.value = newValue;
 				element.update();
 				if(changed) {
-					element.options.afterChange();
-					element.options.afterIncrease();
+					element.options.afterChange.call(element);
+					element.options.afterIncrease.call(element);
 				}
 				return this;
 			};
@@ -71,21 +73,21 @@
 				np.children().removeClass("disabled");
 				var changed = false;
 				var newValue = element.options.value-element.options.step;
-				if( element.options.min && element.options.min > newValue) newValue = element.options.min;
+				if( element.options.min!==false && element.options.min > newValue) newValue = element.options.min;
 				if (newValue != element.options.value){
-					element.options.beforeChange();
-					element.options.beforeDecrease();
+					element.options.beforeChange.call(element);
+					element.options.beforeDecrease.call(element);
 					changed = true;
 				}
-				if( element.options.min && element.options.min == newValue) {
+				if( element.options.min!==false && element.options.min == newValue) {
 					np.children(".dp-numberPicker-sub").addClass("disabled");
-					element.options.onMin();
+					element.options.onMin.call(element);
 				}
 				element.options.value = newValue;
 				element.update();
 				if(changed) {
-					element.options.afterChange();
-					element.options.afterDecrease();
+					element.options.afterChange.call(element);
+					element.options.afterDecrease.call(element);
 				}
 				return this;
 			};
@@ -95,40 +97,40 @@
 				var increase = false;
 				if( typeof(value) == "string") value = betterParseFloat(value);
 				if(isNaN(value)) value = element.options.value;
-				if(element.options.max && element.options.max < value) value = element.options.max;
-				if(element.options.min && element.options.min > value) value = element.options.min;
+				if(element.options.max!==false && element.options.max < value) value = element.options.max;
+				if(element.options.min!==false && element.options.min > value) value = element.options.min;
 				if(element.options.value > value) {
-					element.options.beforeChange();
-					element.options.beforeDecrease();
+					element.options.beforeChange.call(element);
+					element.options.beforeDecrease.call(element);
 					changed = true;
 				}
 				if(element.options.value < value) {
-					element.options.beforeChange();
-					element.options.beforeIncrease();
+					element.options.beforeChange.call(element);
+					element.options.beforeIncrease.call(element);
 					changed = true;
 					increase = true;
 				}
-				if( element.options.max && element.options.max == value) {
+				if( element.options.max!==false && element.options.max == value) {
 					np.children(".dp-numberPicker-add").addClass("disabled");
-					element.options.onMin();
+					element.options.onMax.call(element);
 				}
-				if( element.options.min && element.options.min == value) {
+				if( element.options.min!==false && element.options.min == value) {
 					np.children(".dp-numberPicker-sub").addClass("disabled");
-					element.options.onMin();
+					element.options.onMin.call(element);
 				}
 				element.options.value = value;
 				element.update();
 				if(changed){
 					element.options.afterChange();
-					if(increase) element.options.afterIncrease();
-					else element.options.afterDecrease();
+					if(increase) element.options.afterIncrease.call(element);
+					else element.options.afterDecrease.call(element);
 				}
 				return this;
 			}
 			element.update = function(){
 				if(element.options.format && element.options.format.length > 0)
-					np.children(".dp-numberPicker-input").val( element.options.formatter( formatter(element.options.value, element.options.format) ) );
-				else np.children(".dp-numberPicker-input").val( element.options.formatter( element.options.value ) );
+					np.children(".dp-numberPicker-input").val( element.options.formatter.call(element, formatter(element.options.value, element.options.format) ) );
+				else np.children(".dp-numberPicker-input").val( element.options.formatter.call(element, element.options.value ) );
 				return this;
 			};
 			np.children(".dp-numberPicker-add").on("click", function(){element.increase();});
@@ -154,6 +156,7 @@
 			while( isNaN( parseFloat(string) ) && string.length > 0) string = string.substring(1);
 			return parseFloat(string);
 		};
+		return this;
 	};
 }(jQuery));
 

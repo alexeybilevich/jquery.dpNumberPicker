@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<!--
+	DP Number Picker jQuery Plugin, Version 1.0.1
+	Copyright (C) Dustin Poissant 2014
+	License CC BY-NC-SA 3.0 US
+	http://creativecommons.org/licenses/by-nc-sa/3.0/us/
+-->
+<html>
+<head>
+	<title>DP Number Picker v1.0.1</title>
+	<style>
+		body {
+			max-width: 800px;
+			margin: 0 auto;
+			font-size: 18px;
+			font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+			color: #222;
+		}
+		h1 {
+			margin-bottom: 0;
+		}
+		p {
+			margin-top: 4px;
+		}
+		ul {
+			margin-top: 0;
+		}
+		li {
+			padding: 2px 0;
+		}
+		code {
+			display: inline-block;
+			font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+			background-color: #FFF;
+			border: 1px solid #CCC;
+			border-radius: 2px;
+			padding: 1px 2px;
+			letter-spacing: -0.5px;
+		}
+		pre {
+			border: 1px solid #999;
+			border-radius: 3px;
+			padding: 8px;
+			font-size: 14px;
+			line-height: 20px;
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap;
+			white-space: -pre-wrap;
+			white-space: -o-pre-wrap;
+			word-wrap: break-word;
+			background-color: #FFF;
+			font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+			box-shadow:
+				0px 1px 0px rgba(153, 153,153, 0.8),
+				0px 2px 0px rgba(153, 153, 153, 0.8),
+				1px 3px 0px rgba(153, 153, 153, 0.8),
+				1px 4px 1px rgba(153, 153, 153, 0.8);
+			margin-top: 32px;
+			margin-bottom: 16px;
+			tab-size: 2;
+			-moz-tab-size: 2;
+			-ms-tab-size: 2;
+			-o-tab-size: 2;
+			-webkit-tab-size: 2;
+		}
+		pre:before {
+			content: "Code:";
+			display: inline-block;
+			position: relative;
+			top: -24px;
+			margin-bottom: -50px;
+			background-color: #FFF;
+			padding: 8px;
+			border: 1px solid #999;
+			border-radius: 3px;
+			box-shadow:
+				1px 1px 1px rgba(153, 153,153, 0.8);
+			font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+		}
+		a, a:visited, a:active, a:link, a:hover {
+			color: #0000FF;
+		}
+		.section {
+			background-color: #F5F5F5;
+			border: 1px solid #DDDDDD;
+			border-radius: 4px;
+			margin: 16px;
+			padding: 8px;
+			box-shadow:
+				0 0 5px rgba(0,0,0,0.2),
+				0 3px 3px rgba(0,0,0,0.3);
+		}
+		h2, h3, h4 {
+			margin-bottom: 0em;
+			margin-top: 0.75em;
+		}
+		iframe {
+			display: block;
+			width: 100%;
+			border: 0;
+			background: #FFF;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			border: 1px solid #999;
+			border-radius: 3px;
+			box-shadow:
+				inset 3px 3px 3px rgba(0,0,0,0.4),
+				-3px -3px 3px rgba(255,255,255,0.8),
+				3px 3px 3px rgba(255,255,255,0.8);
+			padding: 16px;
+		}
+		.results-tab {
+			display: inline-block;
+			background-color: #FFF;
+			padding: 8px;
+			border: 1px solid #999;
+			border-radius: 3px;
+			box-shadow:
+				1px 1px 1px rgba(153, 153,153, 0.8);
+			font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+			z-index: 999;
+			font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+			padding: 8px;
+			font-size: 14px;
+			line-height: 20px;
+			position:relative;
+			left: 10px;
+			top: 16px;
+		}
+	</style>
+</head>
+<body>
+	<div style="text-align: center;">
+			<div style="display: inline-block; vertical-align: top;">
+				<h1>DP Number Picker</h1>
+				<p><em><a href="https://github.com/dustinpoissant" target="_blank" style="text-decoration: none; color: #555;">by Dustin Poissant</a></em></p>
+			</div>
+			<a href="https://github.com/dustinpoissant" target="_blank"><img id="gravitar" src="http://www.gravatar.com/avatar/7c5044d4e71d5bb18a4a67152046bfa3" style="vertical-align: top; margin: 15px; display: inline-block; width: 100%; max-width: 80px; border-radius: 9999px; border: 1px solid #999; box-shadow: 1px 1px 5px rgba(0,0,0,0.5);"/></a>
+	</div>
+	<div class="section" id="nav">
+		<h2>About the Project</h2>
+		<a href="changelog.html"><strong>Current Version: 1.0.1</strong> - <em>Updated 3/7/2014</em></a><br><br>
+		<a href="https://github.com/dustinpoissant/jquery.dpNumberPicker/archive/master.zip" target="_blank">Download</a><br><br>
+		<a href="https://github.com/dustinpoissant/jquery.dpNumberPicker" target="_blank">View on GitHub</a>
+		<br>
+		<br>
+		<p>
+			A jQuery Plugin which creates a widget that allows users to select a easily select a number. Number can have a minimum or maximum buttons. "+" and "-" buttons are used as controls along with keyboard input. Various Callback methods are available. And the number can be formatter using a formatter method or a format string (or both together).
+		</p>
+		<ul>
+			<li><a href="#installation">Installation</a></li>
+			<li><a href="#basic">Basic Useage</a></li>
+			<li><a href="#options">Options</a></li>
+			<li><a href="#advanced">Advanced Usage</a></li>
+			<li><a href="#skinning">Skinning</a></li>
+			<li><a href="#jAPI">JavaScript Interface</a></li>
+			<li><a href="#jqAPI">jQuery Interface</a></li>
+			<li><a href="#license">Lisence</a></li>
+		</ul>
+	</div> <!-- .section -->
+	
+	
+	<div id="installation" class="section">
+		<h2>Installation</h2>
+		<p>
+			This is a jQuery Plugin. This plugin requires <a href="http://jquery.com/download/" target="_blank">jQuery 2.x or jQuery 1.x with Migrate Plugin</a>. To install this plugin <a href="http://code.jquery.com/jquery-2.1.0.min.js" target="_blank">download jQuery</a> and <a href="https://github.com/dustinpoissant/jquery.dpNumberPicker/archive/master.zip">this plugin</a>, place them somewheres accessible to your site. Import jquery, this plugin's JavaScript file, and a skin (css file) for this plugin.
+		</p>
+<pre>
+
+&lt;script src="http://code.jquery.com/jquery-2.1.0.min.js">&lt;/script>
+&lt;script src="./dpNumberPicker-1.0.1.js">&lt;/script>
+&lt;link rel="stylesheet" href="./dpNumberPicker-holoLight-1.0.1.css" />
+</pre>
+		<p>
+			This is typically done in the <code>&lt;head></code> of the document.
+		</p>
+		<a href="#">Back to Top</a>
+	</div><!-- #installation -->
+	
+	
+	<div id="basic" class="section">
+		<h2>Basic Usage</h2>
+		<p>
+			This plugin extends the jQuery Object with the method <code>dpNumberPicker</code>. This method takes a container element (typically a <code>&lt;div></code> or <code>&lt;span></code>) and converts it into the number picker widget.
+		</p>
+		<h3>Setting up the DOM (HTML)</h3>
+		<p>
+			A HTMLElement such as a <code>&lt;div></code>, <code>&lt;span></code> or <code>&lt;section></code> are used. This element must be selectable via jQuery selector, the easiest way to accomplish this is by assigning it an <code>id</code> or a <code>class</code>.
+		</p>
+<pre>
+
+&lt;div id="numberPicker">&lt;/div>
+</pre>
+		<p>
+			This should be placed in the <code>&lt;body></code> of the document.
+		</p>
+		<h3>Calling the Plugin (JavaScript)</h3>
+		<p>
+			Because this method modifies the DOM, it can not be called until the DOM (document) has loaded. There are many methods for accomplishing this. The <code>$(document).ready();</code> method is the prefered method for sites using jQuery. For example:
+		</p>
+<pre>
+
+&lt;script>
+  $(document).ready(function(){
+    $("#numberPicker").dpNumberPicker();
+  });
+&lt/script>
+</pre>
+		<p>
+			This should be placed in the <code>&lt;head></code> of the document.
+		</p>
+		
+		<h3>Putting it Together (Results)</h3>
+		<p>
+			Here are the final results of a basic number picker (<a href="examples/example1.html" target="_blank">Example 1</a>):
+		</p>
+<pre>
+
+&lt;html>
+&lt;head>
+	&lt;script src="http://code.jquery.com/jquery-2.1.0.min.js">&lt;/script>
+	&lt;script src="./dpNumberPicker-1.0.1.js">&lt;/script>
+	&lt;link rel="stylesheet" href="./dpNumberPicker-holoLight-1.0.1.css" />
+	&lt;script>
+		$(document).ready(function(){
+			$("#numberPicker").dpNumberPicker();
+		});
+	&lt/script>
+&lt;/head>
+&lt;body>
+	&lt;div id="numberPicker">&lt;/div>
+&lt;/body>
+</pre>
+		<span class="results-tab">Results:</span>
+		<iframe src="examples/example1.html" style="height: 100px;"></iframe>
+		
+		
+		<h3>Start, Min, Max, Step</h3>
+		<p>
+			This method takes 1 argument. It takes an <code>options</code> paramter, or an object litteral with various options specified as items. The four basic options are, min, max, step (incrament), and value (starting value). The can be used as follows (<a href="examples/example2.html" target="_blank">Example 2</a>):
+		</p>
+<pre>
+
+&lt;html>
+&lt;head>
+	&lt;script src="http://code.jquery.com/jquery-2.1.0.min.js">&lt;/script>
+	&lt;script src="./dpNumberPicker-1.0.1.js">&lt;/script>
+	&lt;link rel="stylesheet" href="./dpNumberPicker-holoLight-1.0.1.css" />
+	&lt;script>
+		$(document).ready(function(){
+			$("#numberPicker").dpNumberPicker({
+				value: 5,
+				min: 1,
+				max: 10,
+				step: 1.5
+			});
+		});
+	&lt/script>
+&lt;/head>
+&lt;body>
+	&lt;div id="numberPicker">&lt;/div>
+&lt;/body>
+</pre>
+		<span class="results-tab">Results:</span>
+		<iframe src="examples/example2.html" style="height: 100px;"></iframe>
+		<br>
+		<h3>Getting the Value</h3>
+		<p>
+			This widget would be useless if you were not able to access the access the information (the number). This widget creates a text <code>&lt;input></code> in the DOM within the contained Number Picker. There are two main ways of accessing the value. The first and most obvious way is to access the value of the <code>&lt;input></code> tag as follows:
+		</p>
+<pre>
+
+$("#numberPicker input").val(); // Returns it's value
+</pre>
+		<p>
+			This will return the formatted string (i.e. "$3.25"), which can be parsed to retrive the actual value. We will discuss later another method after we dicuess the <code>options</code> parameter which becomes a member of the Number Pickers HTMLElement.
+		</p>
+		<a href="#">Back to Top</a>
+	</div><!-- #basic -->
+	
+	<div class="section" id="options">
+		<h2>Options</h2>
+		<p>
+			Previous we discussed the <code>options</code> parameter, and the four basic options. Here is a list of all available options and a their descriptions.
+		</p>
+		<p>
+			<strong>min</strong>: (<em>number, default=null</em>) The minumum value allowed.<br><br>
+			<strong>max</strong>: (<em>number, default=null</em>) The maximum value allowed.<br><br>
+			<strong>value</strong>: (<em>number, default=0</em>) The starting value.<br><br>
+			<strong>step</strong>: (<em>number, default=1</em>) The incrament at which the value will increase or decrease when the control buttons are pressed.<br><br>
+			<strong>format</strong>: (<em>string, default=null</em>) The format that the number should be displayed as. For example "##.##" will format "3.4362" as "03.44"<br><br>
+			<strong>editable</strong>: (<em>boolean, default=true</em>) Determines if the user will be able to edit the input box using their keyboard. <code>true</code> allows keyboard input, <code>false</code> disables it.<br><br>
+			<strong>addText</strong>: (<em>string, default="+"</em>) Text that appares on the add button.<br><br>
+			<strong>subText</strong>: (<em>string, default="-"</em>) Text that appears on the subtarct button.<br><br>
+			<strong>formatter</strong>: (<em>function, default=null</em>) Method that formats the value as a string to be displayed. The value is passed in and the desired format should be returned.<br><br>
+			<strong>beforeIncrease</strong>: (function, default=null) Method that is executed right before the value is increase.<br><br>
+			<strong>afterIncrease</strong>: (function, default=null) Method that is executed right after the value is increase.<br><br>
+			<strong>beforeDecrease</strong>: (function, default=null) Method that is executed right before the value is decrease.<br><br>
+			<strong>afterDecrease</strong>: (function, default=null) Method that is executed right after the value is decrease.<br><br>
+			<strong>beforeChange</strong>: (function, default=null) Method that is executed right before the value is changed.<br><br>
+			<strong>afterChange</strong>: (function, default=null) Method that is executed right after the value is changed.<br><br>
+			<strong>onMin</strong>: (function, default=null) Method that is executed when the minimum is reached.<br><br>
+			<strong>onMax</strong>: (function, default=null) Method that is executed when the maximum is reached.<br><br>
+			<br>
+			*default=null indicates that options is ignored unless set by the user.
+		</p>
+		<p>
+			This <code>options</code> paramter is also attached to the element itself as <code>[HTMLElement].options</code>. The <code>options.value</code> item is updated as the value of the number picker updates. This means that you can also access the value of this Number Picker using:
+		</p>
+<pre>
+
+document.getElementById("numberPicker").options.value
+</pre>
+		<p>
+			or
+		</p>
+<pre>
+
+$("#numberPicker")[0].options.value;
+</pre>
+		<p>
+			This also means you can access any of the other members of the <code>options</code> paramter, or call any of its methods.
+		</p>
+		<br>
+		<a href="#">Back to Top</a>
+	</div><!-- #options -->
+	
+	<div id="advanced" class="section">
+		<h2>Advanced Usage</h2>
+		<p>
+			In <a href="#basic">Basic Usage</a> we dicussed the very basics of how to use this plugin. Then we introduced all the options available for the plugin. Now we will explore how to use them.
+		</p>
+		<h3>Formatting</h3>
+		<p>
+			There are two ways of formatting the way the number is displayed. The <code>format</code> option can be used to define the format of the number in terms of the layout of the digits. For example, if you would like "5.8923" to be displayed as "5.9" assign the value "#.#" to the <code>format</code> option as follows: 
+		</p>
+<pre>
+
+$('numberPicker').dpNumberPicker({
+	format: "#.#"
+});
+</pre>
+		<p>
+			This method works well for formatting the number itself. If you wish to add units before or after the numer the <code>formatter</code> option (function) will work. The value (as a string) is passed into the function, a string in the correct format should be returned. For instance, if you wish "3.25" to become "$3.25", define the formatter function as follows:
+		</p>
+<pre>
+
+$('numberPicker').dpNumberPicker({
+	formatter: function(val){
+		return "$"+val;
+	}
+});
+</pre>
+	<p>
+		This method will work as long as the number is exactly "3.25", if the number is "3.24612" you should use the <code>format</code> and the <code>formatter</code> options together. For example (<a href="examples/example3.html">Example 3</a>):
+	</p>
+<pre>
+
+$('numberPicker').dpNumberPicker({
+	step: 0.25,
+	format: "#.##",
+	formatter: function(val){
+		return "$"+val;
+	}
+});
+</pre>
+
+	<span class="results-tab">Results:</span>
+	<iframe src="examples/example3.html" style="height: 100px;"></iframe>
+	<br>
+	<p>
+		Adding units after the number is also easily posible with this option by using <code>return val+" mph";</code>. or any other unit you wish.
+	</p>
+	<p>
+		Furthermore, when this formatter options is executed it's scope (<code>this</code>) is set to the that particular Number Picker. This feature can can be used handle more advanced usage. We will discuss this in the callback methods section.
+		</p>
+		<h3>Callback Methods</h3>
+		<p>
+			Callback Methods are functions that are executed at specific times by the widget. For instance, <code>beforeChange</code> and <code>afterChange</code> are executed by the widget right before or right after the value changes. When these methods are called the are scoped (<code>this</code>) to the widget HTMLElement allowing you to directly access the options of that specifc widget via <code>this.options</code>.
+		</p>
+		<p>
+			Here is an example that shows all callback methods at use (<a href="examples/example4.html" target="_blank">Example 4</a>).
+		</p>
+<pre>
+
+$("#np").dpNumberPicker({
+	min: -5,
+	max: 5,
+	beforeIncrease: function(){log("Before Increase: "+this.options.value);},
+	afterIncrease: function(){log("After Increase: "+this.options.value);},
+	beforeDecrease: function(){log("Before Decrease: "+this.options.value);},
+	afterDecrease: function(){log("After Decrease: "+this.options.value);},
+	beforeChange: function(){log("Before Change: "+this.options.value);},
+	afterChange: function(){log("After Change: "+this.options.value);},
+	onMin: function(){log("On Min: "+this.options.value);},
+	onMax: function(){log("On Max: "+this.options.value);},
+});
+var count = 0;
+function log(message){
+	var l = $("#log");
+	count++;
+	l.html( count+": "+message+"&lt;br>"+l.html());
+}
+</pre>
+		<span class="results-tab">Results:</span>
+		<iframe style="height: 250px;" src="examples/example4.html"></iframe>
+		<br>
+		<p>
+			These may have no use at all or many advanced usage depending on your needs. One example of a nice usage is the ability to change the color of the <code>&lt;input></code> text to red when the number is below 0 and green above 0. For example (<a href="examples/example5.html" target="_blank">Example 5</a>):
+		</p>
+<pre>
+
+$("#numberPicker").dpNumberPicker({
+	afterChange: function(){
+		$(this).removeClass("pos").removeClass("neg");
+		if(this.options.value > 0) $(this).addClass("pos");
+		else if(this.options.value &lt; 0) $(this).addClass("neg");
+	}
+});
+</pre>
+		<span class="results-tab">Results:</span>
+		<iframe style="height: 100px;" src="examples/example5.html"></iframe>
+		<br>
+		<a href="#">Back to Top</a>
+	</div>
+	</div><!-- #advanced -->
+	
+	<div id="skinning" class="section">
+		<h2>Skinning (styling/css)</h2>
+		<p>
+			This plugin has the ability to be skinned (styled) any way you want. I provided 2 skin ("Holo Light" and "Holo Dark") and a wireframe base skin. These skins are applied by importing a different stylesheet. So far in this documentation we have used the "Holo Light" skin/theme. These themes "Holo" are modeled after Android 4.1's theme. "Light" works best on light backgrounds, and "Dark" looks best on dark backgrounds. Here is an example of the "Holo Dark" skin (<a href="examples/example6.html" target="_blank">Example 6</a>):
+		</p>
+		<span class="results-tab">Results:</span>
+		<iframe style="height: 100px;" src="examples/example6.html"></iframe>
+		<br>
+		<p>
+			The default skin is the wire frame skin (no style just a basic outline of the componets. This is used to create your own skin (<a href="examples/example7.html" target="_blank">Example 7</a>).
+		</p>
+		<span class="results-tab">Results:</span>
+		<iframe style="height: 100px;" src="examples/example7.html"></iframe>
+		<br>
+		<h3>Creating Your Own</h3>
+		<p>
+			Start with the basic wire frame skin. You will notice there are four main parts to style. The entire widget has a class of <code>dp-numberPicker</code>, the decrease button has a class of <code>dp-numberPicker-sub</code>, the increase button hass a class of <code>dp-numberPicker-add</code> and the input box has a class of <code>dp-numberPicker-input</code>. Style these four elements, also use sudo selectors such as <code>:hover</code> for interesting effects.
+		</p>
+		<p>
+			When the widget reaches its min or max value the decrease and increase buttons are given as class of <code>disabled</code> respectivly. So use <code>.dp-numberPicker-sub.disabled</code> to style those buttons when they are disabled.
+		</p>
+		<a href="#">Back to Top</a>
+	</div><!-- #skinning -->
+	
+	<div id="jAPI" class="section">
+		<h2>JavaScript Interface</h2>
+		<p>
+			A JavaScript Interface is a way of interfacing (interacting) with the widget (using JavaScript) after the widget has been created. We will discuss later the importance of this and show an example.
+		</p>
+		<p>
+			Here is a list of the JavaScript interfaces, what they do and how to use them.
+		</p>
+		<h3>increase</h3>
+		<p>
+			Calling this method will act as if the increase button was pressed, it will increase the value by the <code>step</code> amount. This method takes no arguments. This method can be called as folllows:
+		</p>
+<pre>
+
+document.getElementById("numberPicker").increase();
+</pre>
+		<h3>decrease</h3>
+		<p>
+			Just as <code>increase</code>, <code>decrease</code> is as if the decrease button was pressed, it will decrease the value by the <code>step</code> amount. This method takes no arguments. This method can be called as follows:
+		</p>
+<pre>
+
+document.getElementById("numberPicker").decrease();
+</pre>
+		<h3>setValue</h3>
+		<p>
+			This sets the value of the widget to a value. The value should be passed to the method as the first argument. For example:
+		</p>
+<pre>
+
+document.getElementById("numberPicker").setValue(5.234);
+// Sets the value to 5.234
+</pre>
+		<h3>update</h3>
+		<p>
+			Update is used to refresh the widget. If you change the values of the <code>options</code> paramter call update to refresh the widget. Do so using:
+		</p>
+<pre>
+
+document.getElementById("numberPicker").update();
+</pre>
+		<h3>Min/Max Example</h3>
+		<p>
+			This example uses two Number Pickers to select a range. The two are linked together in that the value of one, is the min or the max of the other. The min slinder can not go higher than the max slider, and vice-versa. (<a href="examples/example8.html" target="_blank">Example 8</a>)
+		</p>
+<pre>
+
+&lt;script>
+	$(document).ready(function(){
+		$("#min").dpNumberPicker({
+			max: 5,
+			value: 0,
+			afterChange: function(){
+				document.getElementById("max").options.min = this.options.value;
+				document.getElementById("max").update();
+			}
+		});
+		$("#max").dpNumberPicker({
+			min: 0,
+			value: 5,
+			afterChange: function(){
+				document.getElementById("min").options.max = this.options.value;
+				document.getElementById("min").update();
+			}
+		});
+	});
+&lt;/script>
+&lt;strong>	Select a Range&lt;/strong>
+&lt;br>&lt;br>
+Min:
+&lt;div id="min">&lt;/div>
+&lt;br>&lt;br>
+Max:
+&lt;div id="max">&lt;/div>
+</pre>
+		<span class="results-tab">Results:</span>
+		<iframe style="height: 225px;" src="examples/example8.html"></iframe>
+		<h3>Min/Max Example with Pushing</h3>
+		<p>
+			This example is similar to the last but instead of not allowing the max to get lower than the min and vice-versa, they will push each other. Play with it to understand what I mean. For the last instance the <code>update</code> interface was inplimented but not 100% needed, for this example it is required. (<a href="examples/example9.html" target="_blank">Example 9</a>)
+		</p>
+<pre>
+
+$("#min").dpNumberPicker({
+	value: 0,
+	afterChange: function(){
+		var max = document.getElementById("max");
+		if(max.options.value < this.options.value){
+			max.options.value = this.options.value;
+			max.update();
+		}
+	}
+});
+$("#max").dpNumberPicker({
+	value: 5,
+	afterChange: function(){;
+		var min = document.getElementById("min");
+		if(min.options.value > this.options.value){
+			min.options.value = this.options.value;
+			min.update();
+		}
+	}
+});
+</pre>
+		<iframe style="height: 225px;" src="examples/example9.html"></iframe>
+		<br>
+		<a href="#">Back to Top</a>
+	</div><!-- #jAPI -->
+	
+	<div id="jqAPI" class="section">
+		<h2>jQuery Interface</h2>
+		<p>
+			For each JavaScript interface above, there is a jQuery equivelent. Basically what we will be doing is recalling the inital plugin function, but on an Element that is already a widget. We will pass strings (and numbers) as parameters instead of an <code>options</code> paramter. The argument is not case sensitive.
+		</p>
+		<h3>dpNumberPicker("increase")</h3>
+		<p>
+			"increase", "add", "addition" and "incrament" can all be passed into the method and it will act just as the JavaScript Interface <code>increase</code>. The argument is not case sentsitive.
+		</p>
+		<h3>dpNumberPicker("decrease")</h3>
+		<p>
+			"decrease", "sub", "subtract" and "decrament" can all be passed into the method and it will act just as the JavaScript Interface <code>decrease</code>. The argument is not case sentsitive.
+		</p>
+		<h3>dpNumberPicker("setvalue")</h3>
+		<p>
+			"setvalue", "set", "value" and "change" can all be passed into the method and it will act just as the JavaScript Interface <code>setValue</code>. The value to change to should be passed as the second argument. The first argument is not case sensitive.
+		</p>
+		<h3>dpNumberPicker("update")</h3>
+		<p>
+			"update" and "refresh" can both be passed into the method and it will act just as the JavaScript Interface <code>update</code>. The argument is not case sensitive.
+		</p>
+		<p>
+			Here is how to use these interfaces:
+		</p>
+<pre>
+
+$("#numberPicker").dpNumberPicker("increase");
+$("#numberPicker").dpNumberPicker("decrease");
+$("#numberPicker").dpNumberPicker("setvalue", 5.25);
+$("#numberPicker").dpNumberPicker("update");
+</pre>
+		<br>
+		<a href="#">Back to Top</a>
+	</div><!-- #jqAPI -->
+	
+	
+	<div id="license" class="section">
+		<h2>License</h2>
+		<p>
+			This software is licensed to <em>Dustin Poissant under </em><strong>Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)</strong> which means...
+		</p>
+		<strong>You are free to:</strong>
+		<ul>
+			<li><strong>Use</strong> - This software may be used for non-commercial use.</li>
+			<li><strong>Share</strong> - This software may be copied, redistributed in full or in part.</li>
+			<li><strong>Adapt</strong> - This software may be modified, built upon, or adpated in full or in part.</li>
+		</ul>
+		<strong>Under the following terms:</strong>
+		<ul>
+			<li><strong>Attribution</strong> - You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.</li>
+			<li><strong>NonCommercial</strong> - You may NOT use the materials for commercial purposes.</li>
+			<li><strong>ShareAlike</strong> - If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.</li>
+		</ul>
+		<p>
+			No warranties are implied or given, this software is distributed AS-IS. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+		</p>
+		<p>
+			<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">View the "Human Readable" version of this license.</a><br>
+			<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/legalcode" target="_blank">View the full version of this lincese.</a>
+		</p>
+		<a href="#">Back to Top</a>
+	</div>
+	<br><br>
+</body>
+</html>
