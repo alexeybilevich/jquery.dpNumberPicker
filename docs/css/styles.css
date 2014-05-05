@@ -1,0 +1,18 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+a, a:visited, a:hover, a:active, a:link {
+	text-decoration: none;
+	color: inherit;
+}
+body {
+	background-image: url(http://subtlepatterns.com/patterns/linedpaper.png);
+}
+header {
+	background: #3d3d3d;
+	background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #363636),color-stop(1, #464646));
+	background: -ms-linear-gradient(bottom, #363636, #464646);
+	background: -moz-linear-gradient(center bottom, #363636 0, #464646 100%);
+}
